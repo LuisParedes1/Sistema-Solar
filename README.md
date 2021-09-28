@@ -11,13 +11,12 @@ La grilla esta definida en el plano XZ, el eje +Y es normal al plano.
 Cada celda de la grilla mida 20x20 unidades
 
 ## Consigna
----
+
 
 Definir las matrices de transformacion de la Tierra, la Luna, la Estacion Espacial (ISS) y la nave Apollo, 
 para recrear los  movimientos reales de cada cuerpo.
 
-Condiciones a cumplir:
----------------------
+## Condiciones a cumplir:
 
 1) NO ESTA PERMITIDO el uso de funciones trigonometricas (seno y coseno) para el cálculo de las orbitas, 
 deben usar matrices de rotación y traslación para resolverlo

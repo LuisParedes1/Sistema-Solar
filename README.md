@@ -2,6 +2,8 @@
 
 [Video explicando el enunciado](https://youtu.be/2GBGxF-i-iU)
 
+[Pagina de version final](https://luisparedes1.github.io/Sistema-Solar/)
+
 Se debe modelar el sistema solar, teniendo la tierra rotando alrededor del sol, la luna rotando al rededor de la tierra, y otros componentes.
 
 Ejes de coordenadas y escalas

@@ -398,28 +398,25 @@
             EDITAR EL CODIGO A CONTINUACION
 
             *********************************************************************************
-            */
-            
-            var tiemp = 1
-            
+            */           
 
             // tierra rotando alrededor del sol
-            m1=mat4.create(); 
-            mat4.rotate(m1,m1,2*Math.PI*tiemp/ (360*24*60*60),[0,1,0])   // Rotacion alrededor del sol
-            mat4.translate(m1,m1,[60,0,0]);
+            m0=mat4.create(); 
+            mat4.rotate(m0,m0,tiempo * (2*Math.PI/(365*24*60*60)) ,[0,1,0]) //  / (360*24*60*60)
+            mat4.translate(m0,m0,[60,0,0]);
 
-            m1_rot_eje = mat4.create();
-            mat4.rotate(m1_rot_eje,m1, 2*Math.PI*tiempo/(1*24*60*60), [0,1,0]) // Rotacion alrededor del eje de rotacion de la tierra
-            mat4.rotate(m1_rot_eje,m1_rot_eje, 23*Math.PI/180, [0,0,1]);
-
-
-            setTransform(tierra,m1_rot_eje);
+            // Particularidades de la tierra, inclinacion y rotacion al rededor de su eje
+            m1 = mat4.create();
+            mat4.rotate(m1,m0,0,[0,0,1]);
+            mat4.rotate(m1,m1, -23*Math.PI/180, [0,0,1]);
+            mat4.rotate(m1,m1, tiempo * (2*Math.PI/(1*24*60*60)) , [0,1,0]);  //  /(1*24*60*60)
+            setTransform(tierra,m1);
   
             // luna
             m2=mat4.create();     
-            mat4.rotate(m2,m1,2*Math.PI*tiempo/(30*24*60*60), [0,1,0]) // Rotacion de la luna al rededor de la tierra
+            mat4.rotate(m2,m0, tiempo * (2*Math.PI / (30*24*60*60)), [0,1,0]); // /(30*24*60*60)
             mat4.translate(m2,m2,[20,0,0]);
-            setTransform(luna,m2);  
+            setTransform(luna,m2);
 
             // apollo
             m3=mat4.create();
@@ -430,8 +427,8 @@
 
             // iss
             m4=mat4.create(); 
-            mat4.rotate(m4,m1_rot_eje,2*Math.PI*tiempo/(10000), [0,0,1]) // Rotacion de la luna al rededor de la tierra
-            //mat4.rotate(m4,m1,Math.PI*tiempo/1000, [0,0,1])
+            mat4.rotate(m4,m0, tiempo * (2*Math.PI/(15*24*60*60)), [0,0,1]) // Rotacion de la luna al rededor de la tierra
+            //mat4.rotate(m4,m0,Math.PI*tiempo/1000, [0,0,1])
             mat4.translate(m4,m4,[10,0,0]);         
             setTransform(iss,m4);  
 
@@ -495,7 +492,7 @@
 
             actualizarEscena();
 
-            tiempo+= (60*60)*0.1*speed*1/60;
+            tiempo+= (10*24*60*60) * 0.1*speed*1/60; //(365*24*60*60)*
             renderer.render(scene, camera,false,false);   
             $("#display").html("speed:"+speed.toFixed(2)+"<br>camera target: "+cameraTargets[currentCameraTarget]);
 
